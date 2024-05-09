@@ -17,10 +17,18 @@ const allPosts = await Astro.glob('../pages/posts/*.md');
 	  </div>
 	  <div class="flex justify-center">
 	    {allPosts.map((post) => {
-	      return <article class="flex-col ml-4 mr-4">
-	        <h2 class="font-bold text-xl">{dayjs(post.frontmatter.pubDate, 'YYYY-MM-DD').format('MMM D, YYYY')}</h2>
+	      if(post.frontmatter.istitle){
+	        return <a href={post.url}>
+	          <article class="flex-col ml-4 mr-4 bg-red-300 p-2 rounded-lg hover:drop-shadow-md">
+	            <p class="text-xl font-bold italic">{post.frontmatter.title}</p>
+	            <h2>{dayjs(post.frontmatter.pubDate, 'YYYY-MM-DD').format('MMM D, YYYY')}</h2>
+              <p class="line-clamp-6">{post.rawContent()}</p>
+	          </article>
+	        </a>
+	      }
+	      return <article class="flex-col ml-4 mr-4 bg-red-300 p-2 rounded-lg">
+	        <h2 class="text-xl font-bold italic">{dayjs(post.frontmatter.pubDate, 'YYYY-MM-DD').format('MMM D, YYYY')}</h2>
           <p class="line-clamp-6">{post.rawContent()}</p>
-	        <a href={post.url}>Read More</a>
 	      </article>
 	    })}
 	  </div>
