@@ -1,0 +1,11 @@
+---
+const { frontmatter } = Astro.props;
+---
+<div class="flex justify-between items-center ml-2 mr-2">
+  <a href="/" class="text-2xl font-bold">NoahVlncrt</a>
+  <p class="text-xl font-bold">About</p>
+</div>
+<h1 class="ml-2 font-bold italic text-3xl">{frontmatter.title}</h1>
+<div class="prose ml-2 mb-4">
+  <slot />
+</div>
